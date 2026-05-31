@@ -408,7 +408,7 @@ export default function IGRISPage() {
       />
 
       {/* ── MAIN CONSOLE ─────────────────────────────────────── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 280px', gap: 20, alignItems: 'start' }}>
+      <div className="igris-console-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 280px', gap: 20, alignItems: 'start' }}>
 
         {/* LEFT: Chat console */}
         <motion.div

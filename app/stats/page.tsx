@@ -410,7 +410,7 @@ function BodyTracker({ measurements, onAdd }: {
 
       {/* Latest metrics */}
       {latest && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, marginBottom: 16 }}>
+        <div className="stats-body-grid" style={{ display: 'grid', gap: 10, marginBottom: 16 }}>
           {[
             { key: 'weight', label: 'Weight', value: latest.weight, unit: 'kg', prevValue: prev?.weight, icon: <Scale size={14} /> },
             { key: 'waist', label: 'Waist', value: latest.waistCm, unit: 'cm', prevValue: prev?.waistCm, icon: <Ruler size={14} /> },
@@ -740,8 +740,8 @@ export default function StatsPage() {
         {/* Main grid */}
         <div style={{ display: 'grid', gap: 20 }}>
 
-          {/* ROW 1: Radar + Stats + Stamina */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }} className="lg-2col">
+          {/* ROW 1: Radar + Stats */}
+          <div className="stats-grid-row" style={{ display: 'grid', gap: 20 }}>
             <motion.div className="analytics-card" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={cardDelay(1)}>
               <div style={{ fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, fontSize: 18, color: '#f0f4ff', marginBottom: 20 }}>Hunter Stats Radar</div>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 24, flexWrap: 'wrap' }}>
@@ -774,7 +774,7 @@ export default function StatsPage() {
           </div>
 
           {/* ROW 2: Heatmap + Weekly */}
-          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 20 }} className="lg-2col">
+          <div className="stats-grid-row-wide" style={{ display: 'grid', gap: 20 }}>
             <motion.div className="analytics-card" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={cardDelay(3)}>
               <WorkoutHeatmap sessions={completedSessions} />
             </motion.div>
@@ -784,7 +784,7 @@ export default function StatsPage() {
           </div>
 
           {/* ROW 3: Stamina Evolution + Recovery Trend */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }} className="lg-2col">
+          <div className="stats-grid-row" style={{ display: 'grid', gap: 20 }}>
             <motion.div className="analytics-card" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={cardDelay(5)}>
               <StaminaEvolutionGraph
                 timeline={staminaTimeline}

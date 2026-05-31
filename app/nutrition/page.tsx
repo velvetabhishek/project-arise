@@ -632,7 +632,7 @@ export default function NutritionPage() {
 
       {/* ── SUMMARY STRIP ─────────────────────────────────────────────── */}
       <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
-        style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 10, marginBottom: 24 }}
+        className="nutri-summary-strip" style={{ display: 'grid', gap: 10, marginBottom: 24 }}
       >
         {[
           { label: 'Calories', value: todayTotals.calories, max: targets.calories, unit: '', color: '#facc15', suffix: 'kcal' },
@@ -680,7 +680,7 @@ export default function NutritionPage() {
         {/* OVERVIEW TAB */}
         {activeTab === 'overview' && (
           <motion.div key="overview" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-            style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: 20, alignItems: 'start' }}
+            className="nutri-main-grid" style={{ display: 'grid', gap: 20, alignItems: 'start' }}
           >
             {/* LEFT COLUMN */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
@@ -825,7 +825,7 @@ export default function NutritionPage() {
         {/* MEAL LOG TAB */}
         {activeTab === 'log' && (
           <motion.div key="log" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-            style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 20, alignItems: 'start' }}
+            className="nutri-main-grid" style={{ display: 'grid', gap: 20, alignItems: 'start' }}
           >
             {/* Meal list */}
             <div style={{ background: '#0a0a12', border: '1px solid rgba(59,130,246,0.12)', borderRadius: 14, padding: '20px 22px' }}>
@@ -948,7 +948,7 @@ export default function NutritionPage() {
                 &ldquo;These are your available fuel sources, Hunter. Every meal here is accessible in a hostel environment. Green dot = always available. Yellow = common. Grey = sometimes.&rdquo;
               </div>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
+            <div className="nutri-hostel-grid" style={{ display: 'grid', gap: 12 }}>
               {HOSTEL_MEALS.filter(m => !m.tags.includes('hydration')).map(meal => (
                 <HostelMealCard key={meal.name} meal={meal} onAdd={handleAddMeal} />
               ))}
@@ -959,7 +959,7 @@ export default function NutritionPage() {
         {/* IGRIS AI TAB */}
         {activeTab === 'igris' && (
           <motion.div key="igris" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-            style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 20, alignItems: 'start' }}
+            className="nutri-main-grid" style={{ display: 'grid', gap: 20, alignItems: 'start' }}
           >
             <IGRISNutritionAI
               dailyTotals={{ calories: todayTotals.calories, proteinG: todayTotals.proteinG, waterMl: todayWaterMl }}

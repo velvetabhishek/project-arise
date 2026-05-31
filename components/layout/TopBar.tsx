@@ -28,7 +28,7 @@ export function TopBar() {
 
   return (
     <header
-      className="arise-glass"
+      className="arise-glass arise-topbar"
       style={{
         position: 'fixed', top: 0, left: 0, right: 0,
         zIndex: 30, height: 64,

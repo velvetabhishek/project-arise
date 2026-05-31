@@ -2,7 +2,7 @@
 // components/layout/Sidebar.tsx — Desktop HUD Dock + Vertical Sidebar
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   LayoutDashboard, Dumbbell, BarChart3, Bot,
@@ -28,6 +28,13 @@ export function Sidebar() {
   const rankData = RANK_DATA[player.rank];
   const xpPct = xpProgressPercent(player.currentXP, player.xpToNextLevel);
   const [collapsed, setCollapsed] = useState(false);
+
+  // Sync CSS --sidebar-width variable via body class
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.body.classList.toggle('sidebar-collapsed', collapsed);
+    }
+  }, [collapsed]);
 
   return (
     <>

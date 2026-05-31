@@ -109,7 +109,7 @@ function CinematicHero() {
         </div>
 
         {/* Stats row */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', borderTop: '1px solid rgba(26,26,46,0.8)', paddingTop: 14 }}>
+        <div className="hero-stats-row" style={{ display: 'grid', gap: 4, borderTop: '1px solid rgba(26,26,46,0.8)', paddingTop: 14 }}>
           {[
             { label: 'Total XP',  value: player.totalXP.toLocaleString(), color: '#3b82f6', icon: <Zap size={11} />       },
             { label: 'Workouts',  value: player.totalWorkouts,             color: '#f59e0b', icon: <Award size={11} />     },
@@ -196,7 +196,7 @@ export default function DashboardPage() {
         onClose={handleLevelUpClose}
       />
 
-      <div style={{ position: 'relative', zIndex: 1, maxWidth: 1440 }}>
+      <div style={{ position: 'relative', zIndex: 1, width: '100%', overflow: 'hidden' }}>
 
         {/* ── PAGE HEADER ─────────────────────────────────────── */}
         <motion.div
