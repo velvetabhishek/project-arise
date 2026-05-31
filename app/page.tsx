@@ -155,11 +155,11 @@ function StatusStrip() {
       style={{
         padding: '10px 18px', borderRadius: 10,
         background: 'rgba(59,130,246,0.05)', border: '1px solid rgba(59,130,246,0.12)',
-        display: 'flex', alignItems: 'center', gap: 12,
+        display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap',
       }}
     >
       <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#3b82f6', boxShadow: '0 0 7px #3b82f6', flexShrink: 0, animation: 'auraPulse 3s ease-in-out infinite' }} />
-      <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, color: '#8892b0', fontStyle: 'italic', flex: 1, margin: 0 }}>
+      <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, color: '#8892b0', fontStyle: 'italic', flex: 1, margin: 0, minWidth: 0 }}>
         {msg}
       </p>
       <Link href="/training" style={{ textDecoration: 'none', flexShrink: 0 }}>

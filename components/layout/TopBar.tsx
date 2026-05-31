@@ -36,10 +36,10 @@ export function TopBar() {
       }}
     >
       {/* Left spacer on desktop (sidebar offset) */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '100%', paddingLeft: 16, paddingRight: 16 }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '100%', paddingLeft: 16, paddingRight: 16, gap: 8, overflow: 'hidden' }}>
 
         {/* Mobile logo — hidden on desktop (sidebar shows branding) */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }} className="topbar-logo-mobile">
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 1, minWidth: 0 }} className="topbar-logo-mobile">
           <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
             <div style={{
               width: 30, height: 30, borderRadius: 8,
@@ -65,7 +65,7 @@ export function TopBar() {
         </div>
 
         {/* Right: stats cluster */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
 
           {/* Streak pill */}
           <motion.div

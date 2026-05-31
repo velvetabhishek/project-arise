@@ -655,7 +655,7 @@ export default function NutritionPage() {
       </motion.div>
 
       {/* ── TABS ─────────────────────────────────────────────────────── */}
-      <div style={{ display: 'flex', gap: 4, marginBottom: 20, borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: 0 }}>
+      <div className="tab-bar-scroll" style={{ marginBottom: 20, borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: 0 }}>
         {tabs.map(({ id, label, icon: Icon }) => (
           <button
             key={id}

@@ -432,7 +432,8 @@ export default function IGRISPage() {
           <div
             ref={chatAreaRef}
             style={{
-              height: 420,
+              minHeight: 260,
+              maxHeight: 'clamp(260px, 45vh, 480px)',
               overflowY: 'auto',
               padding: '20px 24px',
               display: 'flex',

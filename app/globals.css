@@ -1083,3 +1083,80 @@ input[type="range"]::-moz-range-thumb {
   .stats-summary-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 
+/* ─── NUTRITION PAGE ──────────────────────────────────────────── */
+
+/* Summary strip: 2→3→5 cols */
+.nutri-summary-strip { grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 540px)  { .nutri-summary-strip { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1024px) { .nutri-summary-strip { grid-template-columns: repeat(5, 1fr); } }
+
+/* Main content + sidebar: stack on tablet, side-by-side on desktop */
+.nutri-main-grid { grid-template-columns: 1fr; }
+@media (min-width: 960px)  { .nutri-main-grid { grid-template-columns: 1fr 300px; } }
+@media (min-width: 1200px) { .nutri-main-grid { grid-template-columns: 1fr 340px; } }
+.nutri-main-grid > * { min-width: 0; }
+
+/* Hostel DB: 1→2→3 cols */
+.nutri-hostel-grid { grid-template-columns: 1fr; }
+@media (min-width: 640px)  { .nutri-hostel-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .nutri-hostel-grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* ─── SPACING CONSISTENCY ─────────────────────────────────────── */
+@media (max-width: 640px) {
+  .dashboard-grid { gap: 14px; }
+  .arise-card { padding: 14px; }
+  .analytics-card { padding: 14px; }
+  .hero-banner { padding: 18px 14px; }
+}
+
+/* ─── RESPONSIVE TYPOGRAPHY ───────────────────────────────────── */
+@media (max-width: 640px) {
+  h1 { font-size: clamp(20px, 5vw, 28px) !important; }
+}
+
+/* ─── OVERFLOW PREVENTION (global safety net) ─────────────────── */
+.arise-content > * { min-width: 0; }
+.page-inner > * { min-width: 0; }
+img, video, svg { max-width: 100%; }
+.arise-card, .arise-panel, .analytics-card {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* ─── MOBILE CONTENT CLEARANCE ────────────────────────────────── */
+/* Ensure content clears the fixed bottom nav on mobile */
+@media (max-width: 1023px) {
+  .arise-content { padding-bottom: 88px; }
+}
+
+/* Focus rings should not be clipped */
+input:focus, textarea:focus, select:focus {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── TAB BAR SCROLLABILITY ───────────────────────────────────── */
+.tab-bar-scroll {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  gap: 4px;
+  white-space: nowrap;
+}
+.tab-bar-scroll::-webkit-scrollbar { display: none; }
+
+/* ─── CARD STACKING ───────────────────────────────────────────── */
+.arise-card, .arise-card-hover, .analytics-card, .arise-panel {
+  min-width: 0;
+}
+.dashboard-col-left > *,
+.dashboard-col-mid > *,
+.dashboard-col-right > * { width: 100%; }
+
+/* ─── LAPTOP ADAPTIVE PADDING (1024–1280) ─────────────────────── */
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .arise-card { padding: 18px; }
+  .analytics-card { padding: 18px; }
+  .hero-banner { padding: 22px 20px; }
+}
