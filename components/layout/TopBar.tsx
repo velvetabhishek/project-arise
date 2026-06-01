@@ -32,7 +32,7 @@ export function TopBar() {
       style={{
         position: 'fixed', top: 0, left: 0, right: 0,
         zIndex: 30, height: 64,
-        borderBottom: '1px solid rgba(26,26,46,0.8)',
+        borderBottom: '1px solid rgba(14,14,32,0.75)',
       }}
     >
       {/* Left spacer on desktop (sidebar offset) */}
@@ -74,7 +74,7 @@ export function TopBar() {
             transition={{ duration: 1.5, repeat: Infinity }}
             style={{
               display: 'flex', alignItems: 'center', gap: 6, padding: '6px 12px',
-              background: '#0f0f1a', border: '1px solid #1a1a2e', borderRadius: 8,
+              background: '#0d0d1a', border: '1px solid #131328', borderRadius: 8,
             }}
           >
             <Flame

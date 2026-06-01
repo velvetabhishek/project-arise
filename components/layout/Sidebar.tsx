@@ -45,10 +45,10 @@ export function Sidebar() {
           position: 'fixed', left: 0, top: 0, height: '100%',
           width: collapsed ? 64 : 228,
           display: 'flex', flexDirection: 'column', zIndex: 40,
-          background: 'rgba(6,6,10,0.94)',
+          background: 'rgba(7,7,14,0.96)',
           backdropFilter: 'blur(24px)',
           WebkitBackdropFilter: 'blur(24px)',
-          borderRight: '1px solid rgba(26,26,46,0.7)',
+          borderRight: '1px solid rgba(16,16,36,0.65)',
           transition: 'width 250ms cubic-bezier(0.4,0,0.2,1)',
           overflow: 'hidden',
         }}
@@ -56,7 +56,7 @@ export function Sidebar() {
         {/* Logo / Collapse Toggle */}
         <div style={{
           padding: collapsed ? '22px 0' : '22px 18px',
-          borderBottom: '1px solid rgba(26,26,46,0.7)',
+          borderBottom: '1px solid rgba(16,16,36,0.7)',
           display: 'flex', alignItems: 'center',
           justifyContent: collapsed ? 'center' : 'space-between',
           flexShrink: 0,
@@ -65,9 +65,9 @@ export function Sidebar() {
             <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
               <div style={{
                 width: 30, height: 30, borderRadius: 8,
-                background: 'rgba(59,130,246,0.12)', border: '1px solid rgba(59,130,246,0.28)',
+                background: 'rgba(74,110,210,0.1)', border: '1px solid rgba(74,110,210,0.22)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                boxShadow: '0 0 12px rgba(59,130,246,0.18)',
+                boxShadow: '0 0 10px rgba(74,110,210,0.12)',
                 flexShrink: 0,
               }}>
                 <Swords size={13} color="#60a5fa" />
@@ -83,7 +83,7 @@ export function Sidebar() {
           {collapsed && (
             <div style={{
               width: 30, height: 30, borderRadius: 8,
-              background: 'rgba(59,130,246,0.12)', border: '1px solid rgba(59,130,246,0.28)',
+              background: 'rgba(74,110,210,0.1)', border: '1px solid rgba(74,110,210,0.22)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
               <Swords size={13} color="#60a5fa" />
@@ -113,7 +113,7 @@ export function Sidebar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.15 }}
-              style={{ padding: '16px 18px', margin: '14px 12px 6px', borderRadius: 10, background: '#0a0a12', border: '1px solid #1a1a2e', flexShrink: 0 }}
+              style={{ padding: '16px 18px', margin: '14px 12px 6px', borderRadius: 10, background: '#0c0c18', border: '1px solid #141428', flexShrink: 0 }}
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
                 <div>
@@ -138,7 +138,7 @@ export function Sidebar() {
               }}>
                 ✦ {rankData.label}
               </div>
-              <div style={{ width: '100%', height: 3, background: '#1a1a2e', borderRadius: 2, overflow: 'hidden' }}>
+              <div style={{ width: '100%', height: 3, background: '#111126', borderRadius: 2, overflow: 'hidden' }}>
                 <motion.div
                   animate={{ width: `${xpPct}%` }}
                   transition={{ duration: 0.8, ease: 'easeOut' }}
@@ -170,9 +170,9 @@ export function Sidebar() {
                   padding: collapsed ? '12px' : '11px 14px',
                   borderRadius: 8, marginBottom: 3,
                   textDecoration: 'none',
-                  background: isActive ? 'rgba(59,130,246,0.08)' : 'transparent',
-                  border: `1px solid ${isActive ? 'rgba(59,130,246,0.2)' : 'transparent'}`,
-                  color: isActive ? '#93c5fd' : '#4a5568',
+                  background: isActive ? 'rgba(74,110,210,0.07)' : 'transparent',
+                  border: `1px solid ${isActive ? 'rgba(74,110,210,0.18)' : 'transparent'}`,
+                  color: isActive ? '#93c5fd' : '#484d60',
                   transition: 'all 160ms ease',
                   justifyContent: collapsed ? 'center' : 'flex-start',
                   position: 'relative',
@@ -180,15 +180,15 @@ export function Sidebar() {
                 onMouseEnter={e => {
                   if (!isActive) {
                     const el = e.currentTarget as HTMLAnchorElement;
-                    el.style.background = 'rgba(255,255,255,0.025)';
-                    el.style.color = '#6b7a99';
+                    el.style.background = 'rgba(255,255,255,0.02)';
+                    el.style.color = '#5e6480';
                   }
                 }}
                 onMouseLeave={e => {
                   if (!isActive) {
                     const el = e.currentTarget as HTMLAnchorElement;
                     el.style.background = 'transparent';
-                    el.style.color = '#4a5568';
+                    el.style.color = '#484d60';
                   }
                 }}
               >
@@ -216,8 +216,8 @@ export function Sidebar() {
                     layoutId="sidebar-active-indicator"
                     style={{
                       position: 'absolute', left: 0, top: '20%', bottom: '20%',
-                      width: 2, borderRadius: 1, background: '#3b82f6',
-                      boxShadow: '0 0 6px rgba(59,130,246,0.8)',
+                      width: 2, borderRadius: 1, background: '#4a7cf6',
+                      boxShadow: '0 0 6px rgba(74,124,246,0.6)',
                     }}
                   />
                 )}
@@ -233,7 +233,7 @@ export function Sidebar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              style={{ padding: '16px 20px', borderTop: '1px solid rgba(26,26,46,0.7)', flexShrink: 0 }}
+              style={{ padding: '16px 20px', borderTop: '1px solid rgba(16,16,36,0.7)', flexShrink: 0 }}
             >
               <div style={{ color: '#2d2d50', fontSize: 10, fontFamily: 'Inter, sans-serif', textAlign: 'center', fontStyle: 'italic', lineHeight: 1.6 }}>
                 &ldquo;I alone level up.&rdquo;
@@ -246,10 +246,10 @@ export function Sidebar() {
       {/* ─── MOBILE BOTTOM NAV (compact strip) ───────────────── */}
       <nav className="sidebar-mobile" style={{
         position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 40,
-        background: 'rgba(6,6,10,0.97)',
+        background: 'rgba(7,7,14,0.97)',
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
-        borderTop: '1px solid rgba(26,26,46,0.8)',
+        borderTop: '1px solid rgba(16,16,36,0.9)',
         paddingBottom: 'max(6px, env(safe-area-inset-bottom))',
         paddingTop: 6,
       }}>
