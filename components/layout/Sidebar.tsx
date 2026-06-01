@@ -113,25 +113,25 @@ export function Sidebar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.15 }}
-              style={{ padding: '14px 16px', margin: '12px 10px 4px', borderRadius: 10, background: '#0a0a12', border: '1px solid #1a1a2e', flexShrink: 0 }}
+              style={{ padding: '16px 18px', margin: '14px 12px 6px', borderRadius: 10, background: '#0a0a12', border: '1px solid #1a1a2e', flexShrink: 0 }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
                 <div>
-                  <div style={{ color: '#4a5568', fontSize: 9, fontFamily: 'Space Grotesk, monospace', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 2 }}>Hunter</div>
-                  <div style={{ fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, fontSize: 14, color: '#f0f4ff', letterSpacing: '0.04em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 100 }}>
+                  <div style={{ color: '#4a5568', fontSize: 10, fontFamily: 'Space Grotesk, monospace', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 3 }}>Hunter</div>
+                  <div style={{ fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, fontSize: 14, color: '#f0f4ff', letterSpacing: '0.04em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 100, lineHeight: 1.2 }}>
                     {player.name}
                   </div>
                 </div>
                 <div style={{ textAlign: 'right' }}>
-                  <div style={{ fontFamily: 'Space Grotesk, monospace', fontWeight: 700, fontSize: 20, color: rankData.color, textShadow: `0 0 10px ${rankData.glowColor}`, lineHeight: 1 }}>
+                  <div style={{ fontFamily: 'Space Grotesk, monospace', fontWeight: 700, fontSize: 22, color: rankData.color, textShadow: `0 0 10px ${rankData.glowColor}`, lineHeight: 1 }}>
                     {player.level}
                   </div>
-                  <div style={{ color: '#4a5568', fontSize: 8, fontFamily: 'Space Grotesk, monospace', textTransform: 'uppercase', marginTop: 1 }}>LVL</div>
+                  <div style={{ color: '#4a5568', fontSize: 9, fontFamily: 'Space Grotesk, monospace', textTransform: 'uppercase', marginTop: 2, letterSpacing: '0.1em' }}>LVL</div>
                 </div>
               </div>
               <div style={{
                 display: 'inline-flex', alignItems: 'center',
-                padding: '2px 7px', borderRadius: 20, marginBottom: 8,
+                padding: '2px 8px', borderRadius: 20, marginBottom: 10,
                 background: `${rankData.color}10`, border: `1px solid ${rankData.color}30`,
                 color: rankData.color, fontSize: 9, fontFamily: 'Rajdhani, sans-serif', fontWeight: 700,
                 letterSpacing: '0.1em', textTransform: 'uppercase',
@@ -145,9 +145,9 @@ export function Sidebar() {
                   style={{ height: '100%', borderRadius: 2, background: 'linear-gradient(90deg, #1d4ed8, #60a5fa)', boxShadow: '0 0 6px rgba(59,130,246,0.5)' }}
                 />
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 3 }}>
-                <span style={{ color: '#4a5568', fontSize: 8, fontFamily: 'Space Grotesk, monospace' }}>{player.currentXP} XP</span>
-                <span style={{ color: '#4a5568', fontSize: 8, fontFamily: 'Space Grotesk, monospace' }}>{player.xpToNextLevel} XP</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 5 }}>
+                <span style={{ color: '#4a5568', fontSize: 9, fontFamily: 'Space Grotesk, monospace', letterSpacing: '0.04em' }}>{player.currentXP.toLocaleString()} XP</span>
+                <span style={{ color: '#4a5568', fontSize: 9, fontFamily: 'Space Grotesk, monospace', letterSpacing: '0.04em' }}>{player.xpToNextLevel.toLocaleString()} XP</span>
               </div>
             </motion.div>
           )}
@@ -166,12 +166,12 @@ export function Sidebar() {
                 title={collapsed ? item.label : undefined}
                 style={{
                   display: 'flex', alignItems: 'center',
-                  gap: collapsed ? 0 : 10,
-                  padding: collapsed ? '11px' : '10px 12px',
-                  borderRadius: 8, marginBottom: 2,
+                  gap: collapsed ? 0 : 12,
+                  padding: collapsed ? '12px' : '11px 14px',
+                  borderRadius: 8, marginBottom: 3,
                   textDecoration: 'none',
-                  background: isActive ? 'rgba(59,130,246,0.1)' : 'transparent',
-                  border: `1px solid ${isActive ? 'rgba(59,130,246,0.22)' : 'transparent'}`,
+                  background: isActive ? 'rgba(59,130,246,0.08)' : 'transparent',
+                  border: `1px solid ${isActive ? 'rgba(59,130,246,0.2)' : 'transparent'}`,
                   color: isActive ? '#93c5fd' : '#4a5568',
                   transition: 'all 160ms ease',
                   justifyContent: collapsed ? 'center' : 'flex-start',
@@ -180,8 +180,8 @@ export function Sidebar() {
                 onMouseEnter={e => {
                   if (!isActive) {
                     const el = e.currentTarget as HTMLAnchorElement;
-                    el.style.background = 'rgba(255,255,255,0.03)';
-                    el.style.color = '#8892b0';
+                    el.style.background = 'rgba(255,255,255,0.025)';
+                    el.style.color = '#6b7a99';
                   }
                 }}
                 onMouseLeave={e => {
@@ -201,9 +201,10 @@ export function Sidebar() {
                       exit={{ opacity: 0, width: 0 }}
                       transition={{ duration: 0.18 }}
                       style={{
-                        fontFamily: 'Rajdhani, sans-serif', fontWeight: 600,
-                        fontSize: 13, letterSpacing: '0.04em',
+                        fontFamily: 'Rajdhani, sans-serif', fontWeight: 500,
+                        fontSize: 13, letterSpacing: '0.06em',
                         whiteSpace: 'nowrap', overflow: 'hidden',
+                        lineHeight: 1.3,
                       }}
                     >
                       {item.label}
@@ -232,9 +233,9 @@ export function Sidebar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              style={{ padding: '14px 20px', borderTop: '1px solid rgba(26,26,46,0.7)', flexShrink: 0 }}
+              style={{ padding: '16px 20px', borderTop: '1px solid rgba(26,26,46,0.7)', flexShrink: 0 }}
             >
-              <div style={{ color: '#2d2d50', fontSize: 10, fontFamily: 'Inter, sans-serif', textAlign: 'center', fontStyle: 'italic' }}>
+              <div style={{ color: '#2d2d50', fontSize: 10, fontFamily: 'Inter, sans-serif', textAlign: 'center', fontStyle: 'italic', lineHeight: 1.6 }}>
                 &ldquo;I alone level up.&rdquo;
               </div>
             </motion.div>

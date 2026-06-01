@@ -41,10 +41,10 @@ function CinematicHero() {
         {/* Name + level orb row */}
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 20 }}>
           <div>
-            <div style={{ color: '#4a5568', fontSize: 10, fontFamily: 'Space Grotesk, monospace', letterSpacing: '0.22em', textTransform: 'uppercase', marginBottom: 5 }}>
+            <div style={{ color: '#4a5568', fontSize: 10, fontFamily: 'Space Grotesk, monospace', letterSpacing: '0.24em', textTransform: 'uppercase', marginBottom: 6 }}>
               Hunter Profile
             </div>
-            <h1 style={{ fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, fontSize: 34, color: '#f0f4ff', letterSpacing: '0.04em', lineHeight: 1, marginBottom: 7 }}>
+            <h1 style={{ fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, fontSize: 36, color: '#f0f4ff', letterSpacing: '0.04em', lineHeight: 1.05, marginBottom: 8 }}>
               {player.name}
             </h1>
             <div className="hero-rank-badge" style={{
@@ -203,13 +203,13 @@ export default function DashboardPage() {
           initial={{ opacity: 0, x: -12 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.38 }}
-          style={{ marginBottom: 16, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
+          style={{ marginBottom: 24, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
         >
           <div>
-            <div style={{ color: '#4a5568', fontSize: 10, fontFamily: 'Space Grotesk, monospace', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 3 }}>
+            <div style={{ color: '#4a5568', fontSize: 10, fontFamily: 'Space Grotesk, monospace', letterSpacing: '0.22em', textTransform: 'uppercase', marginBottom: 5 }}>
               {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
             </div>
-            <h1 style={{ fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, fontSize: 26, color: '#f0f4ff', letterSpacing: '0.05em', textTransform: 'uppercase', lineHeight: 1 }}>
+            <h1 style={{ fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, fontSize: 28, color: '#f0f4ff', letterSpacing: '0.05em', textTransform: 'uppercase', lineHeight: 1.1 }}>
               Command Center
             </h1>
           </div>
@@ -226,7 +226,7 @@ export default function DashboardPage() {
         </motion.div>
 
         {/* ── STATUS STRIP ─────────────────────────────────────── */}
-        <div style={{ marginBottom: 20 }}>
+        <div style={{ marginBottom: 24 }}>
           <StatusStrip />
         </div>
 
@@ -238,13 +238,13 @@ export default function DashboardPage() {
         <div className="dashboard-grid">
 
           {/* LEFT: Hero Profile + Stat Grid */}
-          <div className="dashboard-col-left" style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+          <div className="dashboard-col-left" style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
             <CinematicHero />
             <StatGrid />
           </div>
 
           {/* MIDDLE: Quest Board + Daily Mission */}
-          <div className="dashboard-col-mid" style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+          <div className="dashboard-col-mid" style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
             <div className="arise-card">
               <QuestBoard />
             </div>
@@ -252,7 +252,7 @@ export default function DashboardPage() {
           </div>
 
           {/* RIGHT: IGRIS (tall) + Streak (compact below) */}
-          <div className="dashboard-col-right" style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+          <div className="dashboard-col-right" style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
             <IGRISPanel />
             <StreakTracker />
           </div>
