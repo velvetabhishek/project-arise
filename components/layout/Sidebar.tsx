@@ -173,7 +173,7 @@ export function Sidebar() {
                   background: isActive ? 'rgba(74,110,210,0.07)' : 'transparent',
                   border: `1px solid ${isActive ? 'rgba(74,110,210,0.18)' : 'transparent'}`,
                   color: isActive ? '#93c5fd' : '#484d60',
-                  transition: 'all 160ms ease',
+                  transition: 'background-color 180ms cubic-bezier(0.4,0,0.2,1), border-color 180ms cubic-bezier(0.4,0,0.2,1), color 180ms cubic-bezier(0.4,0,0.2,1), transform 150ms cubic-bezier(0.25,1,0.5,1)',
                   justifyContent: collapsed ? 'center' : 'flex-start',
                   position: 'relative',
                 }}
@@ -182,6 +182,7 @@ export function Sidebar() {
                     const el = e.currentTarget as HTMLAnchorElement;
                     el.style.background = 'rgba(255,255,255,0.02)';
                     el.style.color = '#5e6480';
+                    el.style.transform = 'translateY(-0.5px)';
                   }
                 }}
                 onMouseLeave={e => {
@@ -189,6 +190,7 @@ export function Sidebar() {
                     const el = e.currentTarget as HTMLAnchorElement;
                     el.style.background = 'transparent';
                     el.style.color = '#484d60';
+                    el.style.transform = '';
                   }
                 }}
               >

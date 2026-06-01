@@ -62,11 +62,11 @@
   /* Keyframes */
   @keyframes auraPulse {
     0%, 100% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.05); opacity: 1; }
+    50% { transform: scale(1.03); opacity: 1; }    /* was 1.05 — calmer */
   }
   @keyframes glowPulse {
-    0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
-    50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); }
+    0%, 100% { box-shadow: 0 0 20px rgba(74, 110, 210, 0.18); }
+    50% { box-shadow: 0 0 36px rgba(74, 110, 210, 0.32); }   /* was 0.6 — calmer */
   }
   @keyframes flame {
     0%, 100% { transform: scale(1) rotate(-3deg); opacity: 0.9; }
@@ -85,15 +85,15 @@
     100% { transform: translateY(100%); }
   }
   @keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(10px); }
+    0% { opacity: 0; transform: translateY(6px); }   /* was 10px — subtler */
     100% { opacity: 1; transform: translateY(0); }
   }
   @keyframes slideUp {
-    0% { opacity: 0; transform: translateY(20px); }
+    0% { opacity: 0; transform: translateY(14px); }  /* was 20px — subtler */
     100% { opacity: 1; transform: translateY(0); }
   }
   @keyframes scaleIn {
-    0% { opacity: 0; transform: scale(0.95); }
+    0% { opacity: 0; transform: scale(0.97); }      /* was 0.95 — subtler */
     100% { opacity: 1; transform: scale(1); }
   }
 }
@@ -102,6 +102,24 @@
 :root {
   --sidebar-width: 0px;         /* mobile: no sidebar */
   --topbar-height: 64px;
+
+  /* ─── Premium motion easing tokens ─────────────────────────
+     Inspired by Apple/Material design motion language.
+     Use these consistently for a unified physical feel.     */
+  --ease-standard:    cubic-bezier(0.4, 0, 0.2, 1);   /* Material standard — general UI */
+  --ease-decelerate:  cubic-bezier(0, 0, 0.2, 1);     /* Enter / appear */
+  --ease-accelerate:  cubic-bezier(0.4, 0, 1, 1);     /* Exit / disappear */
+  --ease-out-expo:    cubic-bezier(0.16, 1, 0.3, 1);  /* Cinematic settle — dramatic */
+  --ease-out-quart:   cubic-bezier(0.25, 1, 0.5, 1);  /* Smooth decelerate — card lifts */
+  --ease-inout-quart: cubic-bezier(0.76, 0, 0.24, 1); /* Symmetric reveal */
+  --ease-spring:      cubic-bezier(0.34, 1.2, 0.64, 1); /* Subtle spring — no bounce */
+
+  /* ─── Motion duration tokens ────────────────────────────── */
+  --dur-instant:   80ms;   /* Button press feedback */
+  --dur-fast:      150ms;  /* Hover state changes */
+  --dur-normal:    220ms;  /* Standard transitions */
+  --dur-slow:      350ms;  /* Panel/overlay appear */
+  --dur-cinematic: 900ms;  /* Progress bars, reveals */
 }
 /* Desktop: sidebar visible at 228px */
 @media (min-width: 1024px) {
@@ -411,7 +429,10 @@ input, textarea, select {
   border-radius: 12px;
   padding: 22px 26px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), 0 1px 0 rgba(255,255,255,0.025) inset;
-  transition: border-color 200ms ease, box-shadow 200ms ease;
+  transition:
+    border-color var(--dur-normal) var(--ease-standard),
+    box-shadow var(--dur-normal) var(--ease-standard),
+    transform var(--dur-normal) var(--ease-out-quart);
 }
 .arise-card-hover {
   background-color: #0b0b16;
@@ -419,19 +440,27 @@ input, textarea, select {
   border-radius: 12px;
   padding: 22px 26px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
-  transition: border-color 200ms ease, box-shadow 200ms ease;
+  transition:
+    border-color var(--dur-normal) var(--ease-standard),
+    box-shadow var(--dur-normal) var(--ease-standard),
+    background-color var(--dur-normal) var(--ease-standard),
+    transform var(--dur-normal) var(--ease-out-quart);
   cursor: pointer;
 }
 .arise-card-hover:hover {
   border-color: rgba(70, 90, 160, 0.28);
-  box-shadow: 0 0 24px rgba(80, 110, 200, 0.07), 0 8px 32px rgba(0,0,0,0.45);
+  box-shadow: 0 0 24px rgba(80, 110, 200, 0.07), 0 12px 40px rgba(0,0,0,0.5);
   background-color: #0d0d1a;
+  transform: translateY(-1px);    /* subtle physical lift */
 }
 .arise-panel {
   background-color: #0e0e1a;
   border: 1px solid rgba(20, 20, 42, 0.9);
   border-radius: 10px;
   padding: 18px 20px;
+  transition:
+    border-color var(--dur-normal) var(--ease-standard),
+    box-shadow var(--dur-normal) var(--ease-standard);
 }
 
 /* Glassmorphism — slightly more opaque for premium solidity */
@@ -440,9 +469,12 @@ input, textarea, select {
   -webkit-backdrop-filter: blur(16px);
   border-color: rgba(255, 255, 255, 0.04);
   background: rgba(9, 9, 16, 0.92);
+  transition:
+    background var(--dur-normal) var(--ease-standard),
+    border-color var(--dur-normal) var(--ease-standard);
 }
 
-/* Buttons — calmer glow presence */
+/* Buttons — physical, cinematic, restrained */
 .arise-btn-primary {
   background-color: #4a7cf6;
   color: white;
@@ -452,7 +484,11 @@ input, textarea, select {
   border-radius: 8px;
   border: none;
   cursor: pointer;
-  transition: all 200ms ease;
+  transition:
+    background-color var(--dur-fast) var(--ease-standard),
+    box-shadow var(--dur-normal) var(--ease-standard),
+    transform var(--dur-fast) var(--ease-out-quart),
+    opacity var(--dur-fast) var(--ease-standard);
   box-shadow: 0 0 20px rgba(74, 124, 246, 0.18);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -462,12 +498,17 @@ input, textarea, select {
   gap: 8px;
   justify-content: center;
   text-decoration: none;
+  will-change: transform, box-shadow;
 }
 .arise-btn-primary:hover {
   background-color: #6b9bf7;
-  box-shadow: 0 0 36px rgba(74, 124, 246, 0.28);
+  box-shadow: 0 0 32px rgba(74, 124, 246, 0.28);
+  transform: translateY(-1px);   /* gentle physical lift */
 }
-.arise-btn-primary:active { transform: scale(0.97); }
+.arise-btn-primary:active {
+  transform: scale(0.97) translateY(0);
+  transition-duration: var(--dur-instant);
+}
 
 .arise-btn-secondary {
   background: transparent;
@@ -478,7 +519,11 @@ input, textarea, select {
   padding: 12px 24px;
   border-radius: 8px;
   cursor: pointer;
-  transition: all 200ms ease;
+  transition:
+    border-color var(--dur-fast) var(--ease-standard),
+    color var(--dur-fast) var(--ease-standard),
+    box-shadow var(--dur-normal) var(--ease-standard),
+    transform var(--dur-fast) var(--ease-out-quart);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-size: 14px;
@@ -487,9 +532,18 @@ input, textarea, select {
   gap: 8px;
   text-decoration: none;
 }
-.arise-btn-secondary:hover { border-color: #4a7cf6; color: #7aa8f5; }
+.arise-btn-secondary:hover {
+  border-color: #4a7cf6;
+  color: #7aa8f5;
+  transform: translateY(-1px);
+  box-shadow: 0 0 18px rgba(74,124,246,0.1);
+}
+.arise-btn-secondary:active {
+  transform: scale(0.97) translateY(0);
+  transition-duration: var(--dur-instant);
+}
 
-/* Progress bars — calmer dark track */
+/* Progress bars — cinematic settle easing */
 .arise-progress-track {
   width: 100%;
   height: 8px;
@@ -500,7 +554,7 @@ input, textarea, select {
 .arise-progress-fill {
   height: 100%;
   border-radius: 9999px;
-  transition: width 700ms ease-out;
+  transition: width var(--dur-cinematic) var(--ease-out-expo);
 }
 
 /* IGRIS — calmer, more contemplative presence */
@@ -518,6 +572,9 @@ input, textarea, select {
   padding: 18px 20px;
   box-shadow: 0 0 24px rgba(80, 110, 200, 0.05);
   position: relative;
+  transition:
+    border-color var(--dur-normal) var(--ease-standard),
+    box-shadow var(--dur-slow) var(--ease-standard);
 }
 .igris-bubble::before {
   content: '';
@@ -676,7 +733,10 @@ input, textarea, select {
   border: 1px solid #141428;
   border-radius: 14px;
   padding: 20px 24px;
-  transition: border-color 200ms ease, box-shadow 200ms ease;
+  transition:
+    border-color var(--dur-normal) var(--ease-standard),
+    box-shadow var(--dur-slow) var(--ease-standard),
+    background-color var(--dur-slow) var(--ease-standard);
 }
 .workout-exercise-card.active {
   border-color: rgba(74, 120, 230, 0.38);
@@ -699,9 +759,14 @@ input, textarea, select {
   font-size: 13px;
   font-family: 'Space Grotesk', monospace;
   font-weight: 700;
-  transition: all 200ms ease;
+  transition:
+    background-color var(--dur-fast) var(--ease-standard),
+    border-color var(--dur-fast) var(--ease-standard),
+    box-shadow var(--dur-normal) var(--ease-standard),
+    transform var(--dur-fast) var(--ease-out-quart);
   cursor: pointer;
 }
+.set-bubble:hover { transform: scale(1.06); }
 .set-bubble.done {
   background: #4a7cf6;
   border-color: #4a7cf6;
@@ -841,10 +906,19 @@ input, textarea, select {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   outline: none;
-  transition: border-color 200ms ease;
+  transition:
+    border-color var(--dur-fast) var(--ease-standard),
+    box-shadow var(--dur-normal) var(--ease-decelerate);
 }
-.igris-input:focus { border-color: rgba(74,110,210,0.32); }
-.igris-input::placeholder { color: #3e4258; }
+.igris-input:focus {
+  border-color: rgba(74,110,210,0.40);
+  box-shadow: 0 0 0 3px rgba(74,110,210,0.08), 0 0 16px rgba(74,110,210,0.06);
+}
+.igris-input::placeholder {
+  color: #3e4258;
+  transition: color var(--dur-fast) var(--ease-standard);
+}
+.igris-input:focus::placeholder { color: #555870; }
 .igris-send-btn {
   width: 40px;
   height: 40px;
@@ -855,12 +929,23 @@ input, textarea, select {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 200ms ease;
+  transition:
+    background-color var(--dur-fast) var(--ease-standard),
+    box-shadow var(--dur-normal) var(--ease-standard),
+    transform var(--dur-fast) var(--ease-out-quart);
   flex-shrink: 0;
   box-shadow: 0 0 12px rgba(74, 124, 246, 0.2);
+  will-change: transform;
 }
-.igris-send-btn:hover { background: #6b9bf7; box-shadow: 0 0 20px rgba(74,124,246,0.32); }
-.igris-send-btn:active { transform: scale(0.95); }
+.igris-send-btn:hover {
+  background: #6b9bf7;
+  box-shadow: 0 0 20px rgba(74,124,246,0.32);
+  transform: translateY(-1px) scale(1.04);
+}
+.igris-send-btn:active {
+  transform: scale(0.94);
+  transition-duration: var(--dur-instant);
+}
 
 /* ─── PHASE 2: HERO BANNER ───────────────────────────────────── */
 .hero-banner {
@@ -914,10 +999,11 @@ input, textarea, select {
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
-.tag-blue { background: rgba(59,130,246,0.12); color: #60a5fa; border: 1px solid rgba(59,130,246,0.25); }
-.tag-green { background: rgba(16,185,129,0.12); color: #10b981; border: 1px solid rgba(16,185,129,0.25); }
-.tag-gold { background: rgba(245,158,11,0.12); color: #f59e0b; border: 1px solid rgba(245,158,11,0.25); }
-.tag-purple { background: rgba(124,58,237,0.12); color: #a78bfa; border: 1px solid rgba(124,58,237,0.25); }
+/* Tag colors — calmer palette */
+.tag-blue   { background: rgba(74,110,210,0.10); color: #7aa8f5; border: 1px solid rgba(74,110,210,0.22); }
+.tag-green  { background: rgba(16,185,129,0.10); color: #34d399; border: 1px solid rgba(16,185,129,0.22); }
+.tag-gold   { background: rgba(245,158,11,0.10); color: #f59e0b; border: 1px solid rgba(245,158,11,0.22); }
+.tag-purple { background: rgba(124,58,237,0.10); color: #a78bfa; border: 1px solid rgba(124,58,237,0.22); }
 
 /* ═══════════════════════════════════════════════════════════════
    PHASE 3 — IMMERSION + MICROINTERACTIONS
@@ -926,7 +1012,7 @@ input, textarea, select {
 @keyframes scanlineMove { 0% { transform: translateY(-100%); } 100% { transform: translateY(200%); } }
 @keyframes hudBlink { 0%,90%,100% { opacity:1; } 95% { opacity:0.2; } }
 @keyframes energyBurst { 0% { transform:scale(0.8); opacity:0.9; } 100% { transform:scale(2.4); opacity:0; } }
-@keyframes statFlash { 0% { background:transparent; } 30% { background:rgba(59,130,246,0.15); } 100% { background:transparent; } }
+@keyframes statFlash { 0% { background:transparent; } 30% { background:rgba(74,110,210,0.12); } 100% { background:transparent; } }
 @keyframes breatheCycle { 0%,100% { transform:scale(1); opacity:0.45; } 50% { transform:scale(1.32); opacity:0.9; } }
 @keyframes rippleOut { 0% { transform:scale(0); opacity:0.5; } 100% { transform:scale(3); opacity:0; } }
 @keyframes igrisProcess { 0%,100% { width:20%; } 50% { width:100%; } }
@@ -934,7 +1020,7 @@ input, textarea, select {
 @keyframes borderGlow { 0%,100% { border-color:rgba(59,130,246,0.2); box-shadow:0 0 0 transparent; } 50% { border-color:rgba(59,130,246,0.5); box-shadow:0 0 20px rgba(59,130,246,0.12); } }
 @keyframes radarSweep { 0% { transform:rotate(0deg); } 100% { transform:rotate(360deg); } }
 @keyframes xpFloat { 0% { opacity:1; transform:translateY(0) scale(1); } 100% { opacity:0; transform:translateY(-36px) scale(0.8); } }
-@keyframes numberPop { 0% { transform:scale(1); } 40% { transform:scale(1.22); color:#60a5fa; } 100% { transform:scale(1); } }
+@keyframes numberPop { 0% { transform:scale(1); } 40% { transform:scale(1.14); color:#7aa8f5; } 100% { transform:scale(1); } }
 @keyframes shimmerPass { 0% { transform:translateX(-100%); } 100% { transform:translateX(200%); } }
 
 /* HUD scanlines on cards */
@@ -949,34 +1035,58 @@ input, textarea, select {
   animation:scanlineMove 6s linear infinite; pointer-events:none; z-index:2;
 }
 
-/* Magnetic button */
-.magnetic-btn { transition:transform 200ms cubic-bezier(0.34,1.56,0.64,1),box-shadow 200ms ease; }
-.magnetic-btn:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(59,130,246,0.25); }
-.magnetic-btn:active { transform:translateY(0) scale(0.96); box-shadow:none; }
+/* Magnetic button — restrained physical lift, no bounce */
+.magnetic-btn {
+  transition:
+    transform var(--dur-normal) var(--ease-out-quart),
+    box-shadow var(--dur-normal) var(--ease-standard);
+}
+.magnetic-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(80,110,200,0.15);
+}
+.magnetic-btn:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: none;
+  transition-duration: var(--dur-instant);
+}
 
-/* Tactile press */
-.tactile { transition:transform 110ms ease,filter 110ms ease; cursor:pointer; }
-.tactile:active { transform:scale(0.95); filter:brightness(0.85); }
+/* Tactile press — instant physical feedback */
+.tactile {
+  transition:
+    transform var(--dur-instant) var(--ease-standard),
+    filter var(--dur-instant) var(--ease-standard);
+  cursor: pointer;
+}
+.tactile:active { transform: scale(0.95); filter: brightness(0.88); }
 
-/* Glow ping indicator */
+/* Premium hover lift utility — use on any hoverable element */
+.arise-hover-lift {
+  transition:
+    transform var(--dur-normal) var(--ease-out-quart),
+    box-shadow var(--dur-normal) var(--ease-standard);
+}
+.arise-hover-lift:hover { transform: translateY(-1px); }
+
+/* Glow ping indicator — calmer */
 .glow-ping-wrap { position:relative; display:inline-flex; align-items:center; justify-content:center; }
 .glow-ping-wrap::before {
   content:''; position:absolute; inset:-4px; border-radius:50%;
-  background:rgba(59,130,246,0.3); animation:glowPing 2s ease-out infinite;
+  background:rgba(74,110,210,0.2); animation:glowPing 2.4s var(--ease-out-expo) infinite;
 }
 
 /* Stat flash */
-.stat-gain-flash { animation:statFlash 0.7s ease-out; }
-.number-pop { animation:numberPop 0.45s cubic-bezier(0.34,1.56,0.64,1); }
+.stat-gain-flash { animation: statFlash 0.8s var(--ease-standard); }
+.number-pop { animation: numberPop 0.5s var(--ease-spring); }
 
 /* Border breathe */
-.border-breathe { animation:borderGlow 3s ease-in-out infinite; }
+.border-breathe { animation: borderGlow 4s ease-in-out infinite; }
 
-/* Energy ring burst (level-up overlay) */
+/* Energy ring burst — calmer intensity */
 .energy-ring-burst {
   position:absolute; border-radius:50%;
-  border:2px solid rgba(59,130,246,0.6);
-  animation:energyBurst 0.9s ease-out forwards;
+  border: 2px solid rgba(80,110,220,0.4);
+  animation: energyBurst 1.1s var(--ease-out-expo) forwards;
   pointer-events:none;
 }
 
@@ -1041,11 +1151,15 @@ input, textarea, select {
   border-radius: 14px;
   padding: 24px 28px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.38), 0 1px 0 rgba(255,255,255,0.025) inset;
-  transition: border-color 250ms ease, box-shadow 250ms ease;
+  transition:
+    border-color var(--dur-normal) var(--ease-standard),
+    box-shadow var(--dur-normal) var(--ease-standard),
+    transform var(--dur-normal) var(--ease-out-quart);
 }
 .analytics-card:hover {
   border-color: rgba(70, 90, 160, 0.22);
-  box-shadow: 0 0 28px rgba(80, 110, 200, 0.05), 0 4px 24px rgba(0,0,0,0.38);
+  box-shadow: 0 0 28px rgba(80, 110, 200, 0.05), 0 8px 32px rgba(0,0,0,0.4);
+  transform: translateY(-1px);
 }
 
 /* Heatmap cell */
@@ -1074,6 +1188,9 @@ input, textarea, select {
   border-radius: 12px;
   padding: 22px 26px;
   box-shadow: 0 0 24px rgba(74, 120, 230, 0.07), 0 8px 32px rgba(0,0,0,0.45);
+  transition:
+    border-color var(--dur-normal) var(--ease-standard),
+    box-shadow var(--dur-slow) var(--ease-standard);
 }
 .arise-card-success {
   background: #0b0b16;
@@ -1081,6 +1198,9 @@ input, textarea, select {
   border-radius: 12px;
   padding: 22px 26px;
   box-shadow: 0 0 16px rgba(16,185,129,0.05), 0 8px 32px rgba(0,0,0,0.45);
+  transition:
+    border-color var(--dur-normal) var(--ease-standard),
+    box-shadow var(--dur-slow) var(--ease-standard);
 }
 
 /* Mobile safe bottom */
